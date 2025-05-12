@@ -1,0 +1,88 @@
+curl --request GET \
+  --url http://localhost:8000/api/v1/auth/superadmin/users \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "test-agent@gmail.com"
+}'
+____________
+curl --request GET \
+  --url 'http://localhost:8000/api/v1/auth/agents/list-all-agents?status=all' \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "test-agent@gmail.com"
+}'
+
+__________________
+curl --request POST \
+  --url http://localhost:8000/api/v1/auth/register-employee \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "grant.baeeerreeington@iamiinsuramce.com.au",
+  "name": "Grant Barrington",
+  "password" : "dKwOYUpPcu" ,
+  "phone": "343492950",
+  "role": "Agent",
+  "address" : "Adjslfjslf",
+  "ABN" : "Company"
+}
+'
+________________________
+
+curl --request PUT \
+  --url http://localhost:8000/api/v1/auth/approve-agent \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "test-agent@gmail.com"
+}'
+__________________________
+curl --request PUT \
+  --url http://localhost:8000/api/v1/auth/update-profile-users \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "grant.barrington@iamiinsuramce.com.au",
+  "name" : "wahid",
+  "password" : "1234567890"
+}'
+________________________
+curl --request PUT \
+  --url http://localhost:8000/api/v1/auth/agent/update-agent-profile \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "blair.nicholls@iamiinsuramce.com.au",
+  "name" : "new user",
+  "password" : "1234567890"
+}'
+________________________
+curl --request PUT \
+  --url http://localhost:8000/api/v1/auth/agent/update-agent-profile \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "blair.nicholls@iamiinsuramce.com.au",
+  "name" : "new user",
+  "password" : "1234567890"
+}'
+________________________
+curl --request PUT \
+  --url http://localhost:8000/api/v1/auth/superadmin/update-profile \
+  --header 'authorization: Bearer {{Authorization}}' \
+  --header 'content-type: application/json' \
+  --header 'x-requested-email: {{X-Requested-Email}}' \
+  --data '{
+  "email": "aaron.gavin@iamiinsuramce.com.au",
+  "name" : "new sper admin",
+  "password" : "1234567890"
+}'

@@ -1,0 +1,136 @@
+{
+  "ProductCode": "BPIP01",
+  "ProductVersion": "1.0",
+  "CarrierReferenceNumber": "",
+  "CarrierQuoteNumber": "",
+  "CarrierPolicyNo": "",
+  "AgencyCode": "",
+  "PolicyStage": "",
+  "CarrierPolicyStatus": "",
+  "TrackingNumber": "",
+  "LineOfBusinessCode": "VAR",
+  "CarrierProductCode": "OBP1",
+  "PolicyTerm": "365",
+  "EffectiveDate": "2025-02-04T00:00:00",
+  "ExpiryDate": "2026-02-04T00:00:00",
+  "DisclaimerAgreedTag": "false",
+  "ABN": "",
+  "Turnover": "9",
+  "BusinessName": "Bashbits",
+  "NumberofEmployees": 10,
+  "JobDescription": "Auxiliary Insurance Services",
+  "YearBusinessStarted": "2020",
+  "ANZSICCode": "6420",
+  "YearsInBusiness": 5,
+  "PolicyCustomerList": [
+    {
+      "CustomerName": "Bashbits",
+      "JobDescription": "Auxiliary Insurance Services",
+      "ANZSICCode": "6420",
+      "CustomerType": "organization",
+      "StreetName": "NORTH  PLACE",
+      "IsPrimaryAddress": "false",
+      "AddressTypeCode": "mailing",
+      "IsManualAddress": "false",
+      "AddressLine1": "1 NORTH PLACE",
+      "AddressLine2": "CHARNWOOD ACT AUS 2615",
+      "City": "CHARNWOOD",
+      "PostalCode": "2615",
+      "CountryCode": "AUS",
+      "Territory": "AU-ACT",
+      "Latitude": -35.1956139,
+      "Longitude": 149.03713429,
+      "GnafPID": "GAACT714846252",
+      "FullAddress": "1 NORTH PLACE CHARNWOOD ACT 2615 ",
+      "StateOrProvinceCode": "ACT"
+    }
+  ],
+  "PolicyLobList": [
+    {
+      "ProductCode": "BPIP01",
+      "PolicyRiskList": [
+        {
+          "ProductElementCode": "R00005",
+          "Flood_FL_rate_SME_Cts": "0.00000000",
+          "Flood_FL_rate_SME_Bld": "0.00000000",
+          "Bushfire_risk_score": "0.00000000",
+          "Cyclone_risk_score": "0.00000000",
+          "Storm_risk_score_SME_Bld": "1.19995346",
+          "Storm_risk_score_SME_Cts": "1.27931133",
+          "Bld_elevation": "613.05",
+          "Flood_FL_ARI_GL": "9999.00000000",
+          "SecurityFeatures": "",
+          "RuralMetro": "",
+          "TerrorLevyTier": "B",
+          "NoOfLevel": "2",
+          "TypeOfBusiness_Name": "Business Operations Only",
+          "LocationType_Name": "Modern Office Block",
+          "JobDescription": "Auxiliary Insurance Services",
+          "LocationType": "MODOB",
+          "TypeOfBusiness": "BOO",
+          "IsPrimaryAddress": "false",
+          "AddressTypeCode": "mailing",
+          "IsManualAddress": "false",
+          "AddressLine1": "1 NORTH PLACE",
+          "AddressLine2": "CHARNWOOD ACT AUS 2615",
+          "City": "CHARNWOOD",
+          "PostalCode": "2615",
+          "CountryCode": "AUS",
+          "Territory": "AU-ACT",
+          "Latitude": -35.1956139,
+          "Longitude": 149.03713429,
+          "GnafPID": "GAACT714846252",
+          "FullAddress": "1 NORTH PLACE CHARNWOOD ACT 2615 ",
+          "StateOrProvinceCode": "ACT",
+          "IsTheftCoverage": "false",
+          "IsMoneyCoverage": "false",
+          "IsGlassCoverage": "false",
+          "PolicyCoverageList": [
+            {
+              "ProductElementCode": "C0001785",
+              "LineOfBusinessCode": "GELI",
+              "DirectorHistory": "DH3",
+              "CreditScore": "CS1",
+              "Import": "N",
+              "BLInterestedParty": "",
+              "AnnualWages": "10000",
+              "Turnover": "9",
+              "NumberofEmployees": 10,
+              "PropertyUnderYourCareorCustody": "10000",
+              "ConctororLabourHirePaynts": "10000",
+              "ClaimsInLastFiveYears": "N",
+              "PolicyBenefitList": [
+                {
+                  "ProductElementCode": "B00863",
+                  "LimitOfLiability": "5000000",
+                  "TaxAuditSI": "10000",
+                  "Excess": "1000"
+                }
+              ]
+            }
+          ],
+          "PolicyEntityList": [
+            {
+              "ProductElementCode": "OCCUPATIONCLAUSEQA",
+              "QuestionId": "39",
+              "AnswerCode": "N"
+            },
+            {
+              "ProductElementCode": "OCCUPATIONCLAUSEQA",
+              "QuestionId": "40",
+              "AnswerCode": "N"
+            }
+          ]
+        }
+      ],
+      "PolicyEntityList": []
+    }
+  ],
+  "PolicyPaymentInfoList": [
+    {
+      "BillingType": "ABI",
+      "PaymentPlan": "PPC001",
+      "IsInstallment": "N"
+    }
+  ]
+}
