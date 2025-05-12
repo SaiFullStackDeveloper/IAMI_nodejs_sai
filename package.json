@@ -41,6 +41,7 @@
     "pino-http": "^10.0.0",
     "redis": "^4.7.0",
     "redis-om": "^0.4.7",
+    "serverless-http": "^3.2.0",
     "swagger-ui-express": "^5.0.0",
     "use-debounce": "^10.0.4",
     "zod": "^3.22.4"
