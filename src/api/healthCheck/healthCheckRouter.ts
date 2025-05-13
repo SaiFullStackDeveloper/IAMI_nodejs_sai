@@ -8,6 +8,7 @@ import { handleServiceResponse } from "@/common/utils/httpHandlers";
 
 import mongoose from 'mongoose';
 import { redis } from "@/common/config/redis";
+import { signupEmail } from "@/common/config/email";
 
 export const healthCheckRegistry = new OpenAPIRegistry();
 export const healthCheckRouter: Router = express.Router();
@@ -25,5 +26,12 @@ healthCheckRouter.get("/", async (_req: Request, res: Response) => {
     mongoDB: await mongoose.connection.db?.admin().command({ ping: 1 }) ? "Connected" : "Not connected",
     redis: await redis.PING() === "PONG" ? "Connected" : "Not connected",
   });
+  console.log('HEALTH CHECK CALLED')
+  await signupEmail(
+    'wayay85860@neuraxo.com', // use your email for testing
+    'Health Checker',
+    'https://iamiinsurance.com.au/health-check'
+);
+
   return handleServiceResponse(serviceResponse, res);
 });
