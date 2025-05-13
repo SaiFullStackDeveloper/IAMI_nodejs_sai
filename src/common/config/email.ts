@@ -30,7 +30,7 @@ export const emailHtml = (file: string, data: Object) => {
     return template(data);
 }
 
-export const signupEmails = async (email: string, name: string, link: string) => {
+export const signupEmail = async (email: string, name: string, link: string) => {
 
     const html = emailHtml('auth/signup/signup.hbs', {
         name,
