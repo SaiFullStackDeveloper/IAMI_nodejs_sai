@@ -92,3 +92,34 @@ export const forgotEmail = async (email: string, name: string, link: string) => 
         console.log(e)
     }
 }
+
+export const signupEmail = async (email: string, name: string, link: string) => {
+    console.log('Preparing to send signup email to:', email);
+
+    // 🔍 Step 2: Check if the Mailgun client is initialized
+    console.log('Mailgun client mg:', mg);
+
+    // 🔍 Step 3: Check if env variables are being read correctly
+    console.log('MAILGUN_API_KEY:', process.env.MAILGUN_API_KEY);
+    console.log('FROM_EMAIL:', process.env.FROM_EMAIL);
+
+    const html = emailHtml('auth/signup/signup.hbs', { name, link });
+    const plainText = emailHtml('auth/signup/signup-plain.hbs', { name, link });
+
+    try {
+        const result = await mg.send({
+            from: {
+                name: "Iamiinsure",
+                email: process.env.FROM_EMAIL || "default@example.com"
+            },
+            to: [{ email, name }],
+            subject: `${name} - Email Verification`,
+            html: html,
+            text: plainText
+        });
+
+        console.log('Email send result:', result); // Optional: Only if Mailgun returns a result
+    } catch (e) {
+        console.error('❌ Failed to send signup email:', e);
+    }
+};
