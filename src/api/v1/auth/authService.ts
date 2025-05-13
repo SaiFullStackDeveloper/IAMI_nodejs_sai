@@ -11,6 +11,8 @@ import { z } from "zod";
 import { EmployeeRegistrationSchema, getAgentsByStatus, ResetSchema, updateAdminProfile, updateAgentApprovalStatus, updateSuperAdminProfile, updateUserProfile } from "./authModel";
 import { userSignupRedisRepository } from "@/common/models/redis/user";
 import { redis } from "@/common/config/redis";
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
 const signupCache = new Map<string, any>();
 const forgotCache = new Map<string, any>();
@@ -69,19 +71,55 @@ export const AuthSignUpService = async (req: UserSignupTypes) => {
         //     token: String(token),
         // });
 
-        emailQueue.add(
-            {
-                ...req,
-                type: "Signup",
-                token: String(token),
-            },
-            {
-                removeOnComplete: true,
-                attempts: 3,
-                jobId: req.email,
-            }
-        );
+        // emailQueue.add(
+        //     {
+        //         ...req,
+        //         type: "Signup",
+        //         token: String(token),
+        //     },
+        //     {
+        //         removeOnComplete: true,
+        //         attempts: 3,
+        //         jobId: req.email,
+        //     }
+        // );
 
+
+        try {
+            // Create transporter
+            // let transporter = nodemailer.createTransport({
+            //   host: process.env.MAILTRAP_HOST,
+            //   port: process.env.MAILTRAP_PORT,
+            //   auth: {
+            //     user: process.env.MAILTRAP_USER,
+            //     pass: process.env.MAILTRAP_PASS,
+            //   },
+            // });
+        
+            var transporter = nodemailer.createTransport({
+                host: "live.smtp.mailtrap.io",
+                port: 587,
+                auth: {
+                  user: "api",
+                  pass: "5bddbec37dfecdebb0e7c3a0fa36e328"
+                }
+              });
+        
+            // Email options
+            let mailOptions = {
+              from: 'noreply@iamiinsurance.com.au',
+              to: 'chi.sckaluma.n.di.191@googlemail.com',
+              subject: 'Hello from Mailtrap',
+              text: 'This is a test email sent using Mailtrap and Node.js!',
+              html: '<b>This is a test email sent using Mailtrap and Node.js!</b>',
+            };
+        
+            // Send email
+            let info = await transporter.sendMail(mailOptions);
+            console.log('Message sent: %s', info.messageId);
+          } catch (err) {
+            console.error('Error sending email:', err);
+          }
         return ServiceResponse.success("Successfully sent login link to your email", null, StatusCodes.CREATED);
     } catch (error) {
         logger.error(`AuthSignUpService: ${(error as Error).message}`);
