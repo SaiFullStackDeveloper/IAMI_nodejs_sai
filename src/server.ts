@@ -5,6 +5,7 @@ import { pino } from "pino";
 
 import { openAPIRouter } from "@/api-docs/openAPIRouter";
 import { healthCheckRouter } from "@/api/healthCheck/healthCheckRouter";
+import { sendMailRouter } from "@/api/healthCheck/sendMailroute";
 import errorHandler from "@/common/middleware/errorHandler";
 import rateLimiter from "@/common/middleware/rateLimiter";
 import requestLogger from "@/common/middleware/requestLogger";
@@ -31,6 +32,7 @@ app.use(requestLogger);
 
 // Routes
 app.use("/health-check", healthCheckRouter);
+app.use("/send-mail", sendMailRouter);
 app.use("/api/v1", v1Router);
 
 // Handlebars routes
