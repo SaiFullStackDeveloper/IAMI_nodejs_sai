@@ -96,7 +96,7 @@ export const isAgent = (req: Request, res: Response, next: NextFunction) => {
 };
 
 
-
+// admin or superadmin or self can return true
 export const isAdminOrSuperAdmin = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const authHeader = req.headers.authorization;
@@ -110,7 +110,10 @@ export const isAdminOrSuperAdmin = async (req: Request, res: Response, next: Nex
 
         const email = decoded.email as string;
         const user = await userModel.findOne({ email });
-
+        // Allow if the user is updating their own profile
+        if (email === req.body.email) {
+            return next();
+        }
         // Allow only SuperAdmin or Employee
         if (!user || user.role !== 'SuperAdmin' && user.role !== 'Admin') {
             return res.status(403).json({ message: 'Access denied: Admins and SuperAdmins only have access to Edit details...' });
@@ -121,7 +124,7 @@ export const isAdminOrSuperAdmin = async (req: Request, res: Response, next: Nex
     }
 };
 
-
+// admin or agent or self can return true
 export const isAdminOrAgent = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(" ")[1];
 
