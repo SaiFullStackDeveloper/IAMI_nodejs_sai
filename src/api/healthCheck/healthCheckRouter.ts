@@ -10,6 +10,9 @@ import mongoose from 'mongoose';
 import { redis } from "@/common/config/redis";
 import { signupEmail } from "@/common/config/email";
 
+import { MailtrapClient } from "mailtrap";
+import dotenv from "dotenv";
+
 export const healthCheckRegistry = new OpenAPIRegistry();
 export const healthCheckRouter: Router = express.Router();
 
@@ -27,11 +30,35 @@ healthCheckRouter.get("/", async (_req: Request, res: Response) => {
     redis: await redis.PING() === "PONG" ? "Connected" : "Not connected",
   });
   console.log('HEALTH CHECK CALLED')
-  await signupEmail(
-    'wayay85860@neuraxo.com', // use your email for testing
-    'Health Checker',
-    'https://iamiinsurance.com.au/health-check'
-);
+  sendTestEmail();
 
   return handleServiceResponse(serviceResponse, res);
 });
+
+const TOKEN = "5bddbec37dfecdebb0e7c3a0fa36e328";
+const SENDER_EMAIL = process.env.MAILTRAP_SENDER_EMAIL as string;
+
+const client = new MailtrapClient({ token: TOKEN });
+
+const sendTestEmail = async () => {
+  try {
+    await client.send({
+      from: {
+        email: "noreply@iamiinsurance.com.au",
+        name: "Mailtrap Test",
+      },
+      to: [
+        {
+          email: "linguistic.capybara.qiyp@letterprotect.com", // Replace with your test address
+        },
+      ],
+      subject: "Hello from Mailtrap API",
+      text: "This is a test email sent using Mailtrap Email Sending API.",
+      html: "<p><strong>This is a test email sent using <em>Mailtrap API</em>.</strong></p>",
+    });
+
+    console.log("✅ Test email sent successfully");
+  } catch (err) {
+    console.error("❌ Failed to send email:", err);
+  }
+};
