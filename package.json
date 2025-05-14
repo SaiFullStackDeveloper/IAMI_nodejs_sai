@@ -9,7 +9,10 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch --clear-screen=false src/index.ts | pino-pretty",
-    "build": "tsup && cp -r src/templates dist/templates",
+    "builda": "tsup && cp -r src/templates dist/templates",
+    "build": "tsup",
+    "postbuild": "powershell -Command Copy-Item -Recurse -Force src\\templates dist\\templates",
+
     "start": "node dist/index.js",
     "clean": "rimraf dist coverage",
     "lint": "biome check src/",
