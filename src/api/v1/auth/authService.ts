@@ -11,6 +11,7 @@ import { z } from "zod";
 import { EmployeeRegistrationSchema, getAgentsByStatus, ResetSchema, updateAdminProfile, updateAgentApprovalStatus, updateSuperAdminProfile, updateUserProfile } from "./authModel";
 import { userSignupRedisRepository } from "@/common/models/redis/user";
 import { redis } from "@/common/config/redis";
+import { signupEmail } from "@/common/config/email";
 
 const signupCache = new Map<string, any>();
 const forgotCache = new Map<string, any>();
@@ -93,6 +94,9 @@ export const AuthSignUpService = async (req: UserSignupTypes) => {
             attempts: 3,
             jobId: req.email,
         });
+        const BACKEND_DOMAIN = "https://iami-nodejs-sai.onrender.com/api/v1"
+
+          signupEmail(req.email, req.name, `${BACKEND_DOMAIN}/auth/verification/${token}/${req.email}`)
 
         return ServiceResponse.success("Successfully sent login link to your email", null, StatusCodes.CREATED);
     } catch (error) {
