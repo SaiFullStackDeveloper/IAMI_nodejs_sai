@@ -11,7 +11,10 @@ import { z } from "zod";
 import { EmployeeRegistrationSchema, getAgentsByStatus, ResetSchema, updateAdminProfile, updateAgentApprovalStatus, updateSuperAdminProfile, updateUserProfile } from "./authModel";
 import { userSignupRedisRepository } from "@/common/models/redis/user";
 import { redis } from "@/common/config/redis";
+import { forgotEmail, signupEmail } from "@/common/config/email";
+import { env } from "../../../common/config/env";
 
+const { REDIS_URI, BACKEND_DOMAIN, FRONTEND_DOMAIN } = env
 const signupCache = new Map<string, any>();
 const forgotCache = new Map<string, any>();
 const sessionCache = new Map<string, any>();
@@ -69,19 +72,19 @@ export const AuthSignUpService = async (req: UserSignupTypes) => {
         //     token: String(token),
         // });
 
-        emailQueue.add(
-            {
-                ...req,
-                type: "Signup",
-                token: String(token),
-            },
-            {
-                removeOnComplete: true,
-                attempts: 3,
-                jobId: req.email,
-            }
-        );
-
+        // emailQueue.add(
+        //     {
+        //         ...req,
+        //         type: "Signup",
+        //         token: String(token),
+        //     },
+        //     {
+        //         removeOnComplete: true,
+        //         attempts: 3,
+        //         jobId: req.email,
+        //     }
+        // );
+        signupEmail(req.email, req.name, `${BACKEND_DOMAIN}/auth/verification/${token}/${req.email}`)
         return ServiceResponse.success("Successfully sent login link to your email", null, StatusCodes.CREATED);
     } catch (error) {
         logger.error(`AuthSignUpService: ${(error as Error).message}`);
@@ -199,6 +202,9 @@ export const AuthForgotService = async (req: { email: string }) => {
                 jobId: req.email,
             }
         );
+        if(user.name) {
+            forgotEmail(req.email, user.name, `${FRONTEND_DOMAIN}/auth/forgot?code=${token}&email=${req.email}`)
+        }
 
         return ServiceResponse.success("Successfully sent forgot link to your email", null, StatusCodes.CREATED);
     } catch (error) {
