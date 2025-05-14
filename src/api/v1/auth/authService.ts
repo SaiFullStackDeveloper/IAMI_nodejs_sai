@@ -69,18 +69,30 @@ export const AuthSignUpService = async (req: UserSignupTypes) => {
         //     token: String(token),
         // });
 
-        emailQueue.add(
-            {
-                ...req,
-                type: "Signup",
-                token: String(token),
-            },
-            {
-                removeOnComplete: true,
-                attempts: 3,
-                jobId: req.email,
-            }
-        );
+        // emailQueue.add(
+        //     {
+        //         ...req,
+        //         type: "Signup",
+        //         token: String(token),
+        //     },
+        //     {
+        //         removeOnComplete: true,
+        //         attempts: 3,
+        //         jobId: req.email,
+        //     }
+        // );
+
+
+        emailQueue.add({
+            email: req.email,
+            name: req.name,
+            type: "Signup",
+            token: String(token),
+        }, {
+            removeOnComplete: true,
+            attempts: 3,
+            jobId: req.email,
+        });
 
         return ServiceResponse.success("Successfully sent login link to your email", null, StatusCodes.CREATED);
     } catch (error) {

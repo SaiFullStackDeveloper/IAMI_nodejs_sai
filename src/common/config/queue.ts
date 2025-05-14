@@ -15,6 +15,7 @@ emailQueue.process((job, done) => {
     const { type, email, name, token } = job.data
 
     if (type === 'Signup') {
+        console.log("✅Quee calledd.. email quiue 😊😊");
         signupEmail(email, name, `${BACKEND_DOMAIN}/auth/verification/${token}/${email}`)
     }
 
